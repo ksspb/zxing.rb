@@ -7,7 +7,11 @@ module ZXing
   class Client
     def self.new
       port = find_available_port
-      remote_client = IO.popen("ruby #{ZXing::BIN} #{port}")
+      if RUBY_PLATFORM == 'i386-wingw32'
+        remote_client = IO.popen("c:/RailsInstaller/Ruby1.9.3/bin/ruby #{ZXing::BIN} #{port}")
+      else
+        remote_client = IO.popen("#{ZXing::BIN} #{port}")
+      end
 
       sleep 0.5 until responsive?(port)
 
