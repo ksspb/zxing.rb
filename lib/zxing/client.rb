@@ -7,7 +7,7 @@ module ZXing
   class Client
     def self.new
       port = find_available_port
-      remote_client = IO.popen("#{ZXing::BIN} #{port}")
+      remote_client = IO.popen("ruby #{ZXing::BIN} #{port}")
 
       sleep 0.5 until responsive?(port)
 
