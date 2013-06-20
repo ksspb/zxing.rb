@@ -8,7 +8,8 @@ module ZXing
     def self.new
       port = find_available_port
       if RUBY_PLATFORM == 'i386-mingw32'
-        remote_client = IO.popen("c:/RailsInstaller/Ruby1.9.3/bin/ruby #{ZXing::BIN} #{port}")
+        ruby_exe = File.join(RbConfig::CONFIG['bindir'], RbConfig::CONFIG['ruby_install_name'])
+        remote_client = IO.popen("#{ruby_exe} #{ZXing::BIN} #{port}")
       else
         remote_client = IO.popen("#{ZXing::BIN} #{port}")
       end
